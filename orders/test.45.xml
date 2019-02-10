@@ -1,0 +1,82 @@
+<Ipf_Job_Order>
+    <Ipf_Conf>
+        <Processor_Name>egpt_test-wf</Processor_Name>
+        <Version>1.0</Version>
+        <Stdout_Log_Level>DEBUG</Stdout_Log_Level>
+        <Stderr_Log_Level>DEBUG</Stderr_Log_Level>
+        <Test>false</Test>
+        <Breakpoint_Enable>false</Breakpoint_Enable>
+        <Acquisition_Station>Acquisition_Station</Acquisition_Station>
+        <Processing_Station>Processing_Station</Processing_Station>
+        <Config_Files>
+            <Conf_File_Name>Conf_File_Name1.xml</Conf_File_Name>
+            <Conf_File_Name>Conf_File_Name2.xml</Conf_File_Name>
+        </Config_Files>
+        <Sensing_Time>
+            <Start>20181223_010000000000</Start>
+            <Stop>20181223_020000000000</Stop>
+        </Sensing_Time>
+        <Dynamic_Processing_Parameters>
+            <Processing_Parameter>
+                <Name>Name1</Name>
+                <Value>Value1</Value>
+            </Processing_Parameter>
+            <Processing_Parameter>
+                <Name>Name2</Name>
+                <Value>Value2</Value>
+            </Processing_Parameter>
+        </Dynamic_Processing_Parameters>
+    </Ipf_Conf>
+    <List_of_Ipf_Procs>
+        <Ipf_Proc a="error in the doc">
+            <Task_Name>test-task1</Task_Name>
+            <Task_Version>1</Task_Version>
+            <BreakPoint>
+                <List_of_Brk_Files>
+                    <Brk_File>
+                        <Enable>false</Enable>
+                        <File_Type a="error">File_Type</File_Type>
+                        <File_Name_Type a="error">Logical</File_Name_Type>
+                        <File_Name a="error">File_Name</File_Name>
+                    </Brk_File>
+                    <Brk_File>
+                        <Enable>false</Enable>
+                        <File_Type a="error">File_Type</File_Type>
+                        <File_Name_Type a="error">Logical</File_Name_Type>
+                        <File_Name a="error">File_Name</File_Name>
+                    </Brk_File>
+                </List_of_Brk_Files>
+            </BreakPoint>
+            <List_of_Inputs>
+                <Input>
+                    <File_Type>NetCDF 4</File_Type>
+                    <File_Name_Type>Logical</File_Name_Type>
+                    <List_of_File_Names>
+                        <File_Name>/home/sdorgan/Desktop/Shared/Projets/EGPT/data/climatology_ratios.nc</File_Name>
+                        <File_Name>/home/sdorgan/Desktop/Shared/Projets/EGPT/data/climatology_ratios-1.nc</File_Name>
+                        <File_Name>/home/sdorgan/Desktop/Shared/Projets/EGPT/data/climatology_ratios-2.nc</File_Name>
+                    </List_of_File_Names>
+                    <List_of_Time_Intervals>
+                        <Time_Interval>
+                            <Start>20181223_010000000000</Start>
+                            <Stop>20191223_020000000000</Stop>
+                            <File_Name>/home/sdorgan/Desktop/Shared/Projets/EGPT/data/climatology_ratios-1.nc</File_Name>
+                        </Time_Interval>
+                        <Time_Interval>
+                            <Start>20181223_010000000000</Start>
+                            <Stop>20191223_020000000000</Stop>
+                            <File_Name>/home/sdorgan/Desktop/Shared/Projets/EGPT/data/climatology_ratios-2.nc</File_Name>
+                        </Time_Interval>
+                    </List_of_Time_Intervals>
+                </Input>
+            </List_of_Inputs>
+            <List_of_Outputs>
+                <!-- <Output>
+                    <File_Type>File_Type</File_Type>
+                    <File_Name_Type>Logical</File_Name_Type>
+                    <File_Name>File_Name</File_Name>
+                </Output> -->
+            </List_of_Outputs>
+        </Ipf_Proc>
+    </List_of_Ipf_Procs>
+</Ipf_Job_Order>

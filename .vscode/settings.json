@@ -1,0 +1,7 @@
+{
+    "python.pythonPath": "/home/sdorgan/anaconda3/bin/python",
+    "python.linting.pylintEnabled": true,
+    "python.analysis.disabled": [
+        "use-before-def"
+    ]
+}

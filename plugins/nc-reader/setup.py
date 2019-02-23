@@ -15,7 +15,7 @@ setup(name=nc_reader.__name__,
       author='CS SI',
       author_email='sebastien.dorgan@c-s.fr',
       license='MIT',
-      packages=['nc_reader'],
+      packages=['nc_reader.v1_0', "nc_reader"],
       classifiers=[
           "Type :: EGPT-READER",
           "Formats :: NetCDF4, HDF5",

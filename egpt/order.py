@@ -58,6 +58,18 @@ class Output:
     file_name_type: Optional[FileNameType] = None
     file_name: Optional[str]  = None
 
+
+@dataclass
+class BreakPointFile:
+    enable: bool = False
+    file_type: Optional[str] = None
+    file_name_type: Optional[FileNameType] = None
+    file_name: Optional[str] = None
+    
+@dataclass
+class BreakPoint:
+    break_point_files: List[BreakPointFile] = field(default_factory=list)
+
 @dataclass
 class IpfProc:
     task_name: Optional[str] = None
@@ -66,16 +78,7 @@ class IpfProc:
     list_of_inputs: List[Input] = field(default_factory=list)
     list_of_output: List[Output] = field(default_factory=list)
 
-@dataclass
-class BreakPointFile:
-    enable: bool = False
-    file_type: Optional[str] = None
-    file_name_type: Optional[FileNameType] = None
-    file_name: Optional[str] = None
 
-@dataclass
-class BreakPoint:
-    break_point_files: List[BreakPointFile] = field(default_factory=list)
 
 
 @dataclass

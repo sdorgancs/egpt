@@ -10,6 +10,6 @@ setup(name=test_task.__name__,
       license='MIT',
       packages=[ 'test_task.v1_0', 'test_task'],
       classifiers=[
-          "Type :: EGPT-TASK"
+          "Type :: EGPT-TASK",
           ],
       zip_safe=False)

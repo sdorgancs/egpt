@@ -122,7 +122,7 @@ enter in the container
 docker exec -ti egpt-cluster_scheduler.1.jxw8e3kpi7s45v8j5buo6n8s1 bash
 root@dask-scheduler:/egpt#
 ```
-run the 'Hello world' workflow
+run the 'Hello world' workflow (the scheduler options is used to pass the ip address or the name of the host where the scheduler is used)
 ```bash
 root@dask-scheduler:/egpt# python egpt.py job run orders/test.45.xml --scheduler scheduler:8786
 egpt.processing.Result(exit_status='OK', outputs=['/tmp/tmpkwuyl8mo'])
@@ -130,7 +130,8 @@ egpt.processing.Result(exit_status='OK', outputs=['/tmp/tmpkwuyl8mo'])
 check the output file
 ```bash
 root@dask-scheduler:/egpt# cat /tmp/tmpkwuyl8mo
-I am worker tcp://10.0.9.10:45417, Hello 1 2019-02-24 14:48:18.664021
-I am worker tcp://10.0.9.6:40757, Hello 1 2019-02-24 14:48:18.664035
-I am worker tcp://10.0.9.8:39001, Hello 1 2019-02-24 14:48:18.664037
+I am worker tcp://10.0.10.13:38183, Hello 1 2019-02-24 15:04:56.199849
+I am worker tcp://10.0.10.14:44115, Hello 2 2019-02-24 15:04:56.199859
+I am worker tcp://10.0.10.9:37639, Hello 3 2019-02-24 15:04:56.199861
 ```
+The 3 tasks have been run on the same time on 3 differents workers

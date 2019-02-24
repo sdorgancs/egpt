@@ -29,7 +29,7 @@
     </Ipf_Conf>
     <List_of_Ipf_Procs>
         <Ipf_Proc a="error in the doc">
-            <Task_Name>test-task1</Task_Name>
+            <Task_Name>test-task</Task_Name>
             <Task_Version>1</Task_Version>
             <BreakPoint>
                 <List_of_Brk_Files>

@@ -15,12 +15,14 @@ def collect(s1, s2, s3):
     return "{}\n{}\n{}\n".format(s1, s2, s3)
 
 def execute(order: JobOrder) -> Result:
-    t = tasks.find("test_task", "1.0")
+    t = tasks.find("test-task", "1.0")
 
-    dsk = {'say-1': (t.execute, 'Hello 1 {}'.format(datetime.now())),
-       'say-2': (t.execute, 'Hello 1 {}'.format(datetime.now())),
-       'say-3': (t.execute, 'Hello 1 {}'.format(datetime.now())),
-       'collect': ['say-1', 'say-2', 'say-3']}
+    dsk = {
+        'say-1': (t.execute, 'Hello 1 {}'.format(datetime.now())),
+        'say-2': (t.execute, 'Hello 1 {}'.format(datetime.now())),
+        'say-3': (t.execute, 'Hello 1 {}'.format(datetime.now())),
+        'collect': ['say-1', 'say-2', 'say-3']
+    }
 
 
     r = get_client().get(dsk, 'collect')

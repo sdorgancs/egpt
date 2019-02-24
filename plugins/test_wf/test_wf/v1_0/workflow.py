@@ -22,8 +22,8 @@ def execute(order: JobOrder) -> Result:
 
     dsk = {
         'say-1': (t.execute, 'Hello 1 {}'.format(datetime.now())),
-        'say-2': (t.execute, 'Hello 1 {}'.format(datetime.now())),
-        'say-3': (t.execute, 'Hello 1 {}'.format(datetime.now())),
+        'say-2': (t.execute, 'Hello 2 {}'.format(datetime.now())),
+        'say-3': (t.execute, 'Hello 3 {}'.format(datetime.now())),
         'collect': ['say-1', 'say-2', 'say-3']
     }
 

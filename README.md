@@ -89,5 +89,48 @@ $ cd egpt && docker build -t egpt
 ### Deploy stack
 On the master machine:
 ```bash
-docker stack deploy --compose-file egpt/docker-compose.yml egpt-cluster
+$ docker stack deploy --compose-file egpt/docker-compose.yml egpt-cluster
+Creating network egpt-cluster_cluster-net
+Creating service egpt-cluster_worker1
+Creating service egpt-cluster_worker2
+Creating service egpt-cluster_worker3
+Creating service egpt-cluster_scheduler
+```
+then run 
+```bash
+$ docker stack ps egpt-cluster
+ID                  NAME                       IMAGE               NODE                 DESIRED STATE       CURRENT STATE           ERROR                       PORTS
+q0acl1413lin        egpt-cluster_worker1.1     egpt:latest         sdorgan-AERO-15XV8   Running             Running 2 minutes ago                               
+teljdg8vw8we        egpt-cluster_worker3.1     egpt:latest         sdorgan-AERO-15XV8   Running             Running 2 minutes ago                               
+wtrg97as9zu6        egpt-cluster_scheduler.1   egpt:latest         sdorgan-AERO-15XV8   Running             Running 2 minutes ago                               
+8fax95zwl0ih        egpt-cluster_worker2.1     egpt:latest         sdorgan-AERO-15XV8   Running             Running 2 minutes ago                               
+```
+to check services are up
+
+# Run your first Workflow
+First, if you are using docker-compose or swarm, find the scheduler container
+```bash
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
+c908b8aa262c        egpt:latest         "dask-worker tcp://s…"   3 seconds ago       Up 1 second                             egpt-cluster_worker3.1.jthezuh19wadzf06bp5b33ox1
+bb25410bfc3d        egpt:latest         "dask-worker tcp://s…"   7 seconds ago       Up 5 seconds                            egpt-cluster_worker2.1.63ooe478a114ep3hv99usw4an
+c49e5350c144        egpt:latest         "dask-worker tcp://s…"   9 seconds ago       Up 8 seconds                            egpt-cluster_worker1.1.z9q1yyeek7yw63v5gw1cuhza8
+03b5d083e751        egpt:latest         "dask-scheduler"         11 seconds ago      Up 9 seconds                            egpt-cluster_scheduler.1.jxw8e3kpi7s45v8j5buo6n8s1
+```
+enter in the container
+```bash
+docker exec -ti egpt-cluster_scheduler.1.jxw8e3kpi7s45v8j5buo6n8s1 bash
+root@dask-scheduler:/egpt#
+```
+run the 'Hello world' workflow
+```bash
+root@dask-scheduler:/egpt# python egpt.py job run orders/test.45.xml --scheduler scheduler:8786
+egpt.processing.Result(exit_status='OK', outputs=['/tmp/tmpkwuyl8mo'])
+```
+check the output file
+```bash
+root@dask-scheduler:/egpt# cat /tmp/tmpkwuyl8mo
+I am worker tcp://10.0.9.10:45417, Hello 1 2019-02-24 14:48:18.664021
+I am worker tcp://10.0.9.6:40757, Hello 1 2019-02-24 14:48:18.664035
+I am worker tcp://10.0.9.8:39001, Hello 1 2019-02-24 14:48:18.664037
 ```

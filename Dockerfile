@@ -11,3 +11,4 @@ WORKDIR /egpt/plugins
 RUN pip install nc_reader/ --target=$HOME/.egpt/plugins
 RUN pip install test_task/ --target=$HOME/.egpt/plugins
 RUN pip install test_wf/ --target=$HOME/.egpt/plugins
+WORKDIR /egpt

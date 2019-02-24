@@ -11,21 +11,44 @@ xarray dataframe are used read, distribute and manipulate satellites instrument 
 bottle is used to implemented the debugging server
 
 # Installation
-First install Python 3.7.1 or better and clone this repository.
+## Install Python and EGPT
+On each machine participating to the cluster: 
+
+- First install Python 3.7 with development headers, miniconda is a simple option
 
 ```bash
-mkdir -p ~/.egpt/plugins
-# Update your .profile to persit this change
-export PYTHONPATH=$PYTHONPATH:~/.egpt/plugins
-# Install egpt core modules
-pip install egpt/
+$ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+$ bash Miniconda3-latest-Linux-x86_64.sh -p /miniconda -b
+$ # Update your user profile to persit this change
+$ export PATH=/miniconda/bin:${PATH}
+$ conda update -y conda && conda create --name dev python=3.7.1 --channel conda-forge
+```
+
+- then clone this repository.
+
+```bash
+$ mkdir -p ~/.egpt/plugins
+$ # Update your user profile to persit this change
+$ export PYTHONPATH=$PYTHONPATH:~/.egpt/plugins
+$ # Install egpt core modules
+$ pip install egpt/
 
 # (Optionnal) Install egpt test plugins
-cd egpt/plugins
-pip install nc_reader/ --target=$HOME/.egpt/plugins
-pip install test_task/ --target=$HOME/.egpt/plugins
-pip install test_wf/ --target=$HOME/.egpt/plugins
+$ cd egpt/plugins
+$ pip install plugins/nc_reader/ --target=$HOME/.egpt/plugins
+$ pip install plugins/test_task/ --target=$HOME/.egpt/plugins
+$ pip install plugins/test_wf/ --target=$HOME/.egpt/plugins
 
-# (Optionnal) Test plugins installation
-python egpt/egpt/modules.py
+$ # (Optionnal) Test plugins installation
+$ python egpt/egpt/modules.py
 ```
+## Create the cluster
+On the master machine run
+```bash
+$ dask-scheduler
+```
+On all the machine participating to the cluster (master included or not) run
+```bash
+$ dask-worker <master>:8786
+```
+where \<master> is the name or the ip address of the master host 

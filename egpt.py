@@ -27,7 +27,8 @@ def run(jobfile:str, scheduler:str):
         Client(scheduler)
     else:
         Client()
-    proc.submit(jobfile)
+    res = proc.submit(jobfile)
+    prettyprinter.pprint(res)
 
 cli = click.CommandCollection(sources=[jobgroup])
 

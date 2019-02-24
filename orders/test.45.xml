@@ -1,6 +1,6 @@
 <Ipf_Job_Order>
     <Ipf_Conf>
-        <Processor_Name>egpt_test-wf</Processor_Name>
+        <Processor_Name>test-wf</Processor_Name>
         <Version>1.0</Version>
         <Stdout_Log_Level>DEBUG</Stdout_Log_Level>
         <Stderr_Log_Level>DEBUG</Stderr_Log_Level>

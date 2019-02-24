@@ -79,10 +79,6 @@ To add a worker to this swarm, run the following command:
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
 On the other machines run the command returned by swarm init to join the cluster
-Go back to the master machine and create a swarm network:
-```bash
-docker network create -d overlay cluster-net
-```
 
 ### Build egpt docker image
 On each machine participating to the cluster:
@@ -90,4 +86,10 @@ On each machine participating to the cluster:
 ```bash
 $ git clone https://github.com/sdorgancs/egpt.git
 $ cd egpt && docker build -t egpt
+```
+
+### Deploy stack
+On the master machine:
+```bash
+docker stack deploy --compose-file egpt/docker-compose.yml egpt-cluster
 ```

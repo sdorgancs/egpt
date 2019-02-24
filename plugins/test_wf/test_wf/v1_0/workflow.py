@@ -7,15 +7,30 @@ from datetime import datetime
 from distributed import Client
 from importlib import invalidate_caches
 from prettyprinter import cpprint
+from datetime import datetime
+from tempfile import NamedTemporaryFile
 import egpt.tasks
 
+def collect(s1, s2, s3):
+    return "{}\n{}\n{}\n".format(s1, s2, s3)
+
 def execute(order: JobOrder) -> Result:
-    cpprint(order)
-    t = tasks.find("egpt_test_task", "1.0")
-    r = get_client().submit(t.execute, "coucou")
-    wait([r])
+    t = tasks.find("test_task", "1.0")
+
+    dsk = {'say-1': (t.execute, 'Hello 1 {}'.format(datetime.now())),
+       'say-2': (t.execute, 'Hello 1 {}'.format(datetime.now())),
+       'say-3': (t.execute, 'Hello 1 {}'.format(datetime.now())),
+       'collect': ['say-1', 'say-2', 'say-3']}
+
+
+    r = get_client().get(dsk, 'collect')
+    fname = ""
+    with NamedTemporaryFile(delete=False) as f:
+        fname = f.name
+        f.write(r)
+        f.flush()
     res = Result()
     res.exit_code = 0
     res.exit_status = "OK"
-    res.outputs = []
+    res.outputs = [fname]
     return res

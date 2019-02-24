@@ -1,0 +1,37 @@
+version: '3.1'
+
+services:
+  scheduler:
+    image: egpt
+    hostname: dask-scheduler
+    networks:
+      - cluster-net
+    ports:
+      - "8786:8786"
+      - "8787:8787"
+    command: ["dask-scheduler"]
+
+  worker1:
+    image: egpt
+    hostname: dask-worker1
+    networks:
+      - cluster-net
+    command: ["dask-worker", "tcp://scheduler:8786"]
+
+  worker2:
+    image: egpt
+    hostname: dask-worker3
+    networks:
+      - cluster-net
+    command: ["dask-worker", "tcp://scheduler:8786"]
+
+  worker3:
+    image: egpt
+    hostname: dask-worker3
+    networks:
+      - cluster-net
+    command: ["dask-worker", "tcp://scheduler:8786"]
+
+networks:
+  cluster-net:
+    driver: overlay 

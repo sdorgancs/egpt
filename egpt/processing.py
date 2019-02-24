@@ -3,7 +3,7 @@ from egpt.order import JobOrder, IpfConf, JobOrder, SensingTime, Input, FileName
 from distributed import Client # type: ignore
 from dataclasses import dataclass, field
 from datetime import datetime
-from egpt import worklows as workflows
+from egpt import workflows
 from egpt import order as order
 from typing import List, Union, Optional, cast
 

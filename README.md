@@ -7,8 +7,6 @@ This project is developped in Python 3.7.1 and it is only a demonstration projec
 dask.distributed is the central component of this projetc, it is used to distribute the computing load over a cluster of machine
 ## xarray>=0.11.0
 xarray dataframe are used read, distribute and manipulate satellites instrument data over the dask.distributed cluster
-## bottle>=0.12.16
-bottle is used to implemented the debugging server
 
 # Installation
 ## Install Python and EGPT

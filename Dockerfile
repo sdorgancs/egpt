@@ -5,7 +5,7 @@ RUN bash Miniconda3-latest-Linux-x86_64.sh -p /miniconda -b
 ENV PATH=/miniconda/bin:${PATH}
 RUN conda update -y conda && conda create --name dev python=3.7.1 --channel conda-forge
 RUN git clone https://github.com/sdorgancs/egpt.git
-ENV PYTHONPATH=~/.egpt/plugins
+ENV PYTHONPATH=/root/.egpt/plugins
 RUN pip install egpt/
 WORKDIR /egpt/plugins
 RUN pip install nc_reader/ --target=$HOME/.egpt/plugins

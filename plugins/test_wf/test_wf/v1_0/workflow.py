@@ -24,14 +24,14 @@ def execute(order: JobOrder) -> Result:
         'say-1': (t.execute, 'Hello 1 {}'.format(datetime.now())),
         'say-2': (t.execute, 'Hello 1 {}'.format(datetime.now())),
         'say-3': (t.execute, 'Hello 1 {}'.format(datetime.now())),
-        'collect': (write, 'say-1', 'say-2', 'say-3')
+        'collect': ['say-1', 'say-2', 'say-3']
     }
 
 
     r = get_client().get(dsk, 'collect')
-
+    f = write(r[0], r[1], r[2])
     res = Result()
     res.exit_code = 0
     res.exit_status = "OK"
-    res.outputs = [r]
+    res.outputs = [f]
     return res

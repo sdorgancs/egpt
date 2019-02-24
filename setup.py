@@ -16,5 +16,6 @@ setup(name=egpt.__name__,
           "dask>=1.0",
           "distributed>=1.25.1",
           "bottle>=0.12.16",
-          "ifaddr>=0.1.6"
+          "ifaddr>=0.1.6",
+          "prettyprinter>=0.14.0"
       ]) 

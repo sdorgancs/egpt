@@ -7,7 +7,7 @@ RUN conda update -y conda && conda create --name dev python=3.7.1 --channel cond
 RUN git clone https://github.com/sdorgancs/egpt.git
 ENV PYTHONPATH=~/.egpt/plugins
 RUN pip install egpt/
-RUN cd egpt/plugins
-RUN pip install plugins/egpt/nc_reader/ --target=$HOME/.egpt/plugins
-RUN pip install plugins/egpt/test_task/ --target=$HOME/.egpt/plugins
-RUN pip install plugins/egpt/test_wf/ --target=$HOME/.egpt/plugins
+WORKDIR /egpt/plugins
+RUN pip install nc_reader/ --target=$HOME/.egpt/plugins
+RUN pip install test_task/ --target=$HOME/.egpt/plugins
+RUN pip install test_wf/ --target=$HOME/.egpt/plugins

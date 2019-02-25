@@ -1,4 +1,4 @@
-# egpt
+# EGPT
 
 This project is developped in Python 3.7.1 and it is only a demonstration project to evaluate the use of dask to create a distributed prototyping environment to help EUMETSAT developpers and scientists to create applications that use satellite instrument data.
 

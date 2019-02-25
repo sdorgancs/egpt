@@ -124,14 +124,46 @@ root@dask-scheduler:/egpt#
 ```
 run the 'Hello world' workflow (the scheduler options is used to pass the ip address or the name of the host where the scheduler is used)
 ```bash
-root@dask-scheduler:/egpt# python egpt.py job run orders/test.45.xml --scheduler scheduler:8786
+root@dask-scheduler:/egpt$ python egpt.py job run orders/test.45.xml --scheduler scheduler:8786
 egpt.processing.Result(exit_status='OK', outputs=['/tmp/tmpkwuyl8mo'])
 ```
-check the output file
+This workflow is very simple but illustrates the mechanisms of this prototype
+```python
+from datetime import datetime
+from tempfile import NamedTemporaryFile
+
+from distributed import get_client,wait
+
+from egpt.order import JobOrder
+from egpt.processing import Result
+from egpt import tasks
+
+
+def write(s1, s2, s3):
+    with NamedTemporaryFile(delete=False, mode="w") as f:
+        f.write("{}\n{}\n{}\n".format(s1, s2, s3))
+        f.flush()
+        return f.name
+
+def execute(order: JobOrder) -> Result:
+    t = tasks.find("test-task", "1.0")
+
+    dsk = {
+        'say-1': (t.execute, 'Hello 1 {}'.format(datetime.now())),
+        'say-2': (t.execute, 'Hello 2 {}'.format(datetime.now())),
+        'say-3': (t.execute, 'Hello 3 {}'.format(datetime.now())),
+        'collect': ['say-1', 'say-2', 'say-3']
+    }
+
+    r = get_client().get(dsk, 'collect')
+    f = write(r[0], r[1], r[2])
+    return Result(exit_code=0, exit_status="OK", outputs=[f])
+```
+The workflow starts by running _say-1_, _say-2_ and _say-3_ activities in parallel. These activities run a task plugin,_test-task_ version _1.0_. The returned values of  _say-1_, _say-2_ and _say-3_ are collected by the _collect_ activity to be writen in a temporary file. If everithing is Ok the content of this file should be like this:
 ```bash
-root@dask-scheduler:/egpt# cat /tmp/tmpkwuyl8mo
+root@dask-scheduler:/egpt$ cat /tmp/tmpkwuyl8mo
 I am worker tcp://10.0.10.13:38183, Hello 1 2019-02-24 15:04:56.199849
 I am worker tcp://10.0.10.14:44115, Hello 2 2019-02-24 15:04:56.199859
 I am worker tcp://10.0.10.9:37639, Hello 3 2019-02-24 15:04:56.199861
 ```
-The 3 tasks have been run on the same time on 3 differents workers
+We can see that the 3 tasks have been run in the same time on 3 differents workers
